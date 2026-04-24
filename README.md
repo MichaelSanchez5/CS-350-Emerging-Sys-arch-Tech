@@ -78,3 +78,112 @@ Conclusion
 This C++ project is a compelling testament to my ability to apply programming fundamentals to solve practical problems in a structured and professional manner. Through this experience, I enhanced my technical expertise, refined my approach to problem-solving, and gained substantial experience in developing maintainable and well-documented code. Including this project in my portfolio underscores my preparedness for advanced studies and future roles in software development.
 	cout << "Student not found.\n";
 }
+
+Student-Management-System/
+│
+├── main.cpp
+├── README.md
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Structure to store student data
+struct Student {
+    int id;
+    string name;
+    float marks;
+};
+
+// Function prototypes
+void addStudent(vector<Student>& students);
+void displayStudents(const vector<Student>& students);
+void searchStudent(const vector<Student>& students);
+
+int main() {
+    vector<Student> students;
+    int choice;
+
+    do {
+        cout << "\n===== Student Management System =====\n";
+        cout << "1. Add Student\n";
+        cout << "2. Display All Students\n";
+        cout << "3. Search Student by ID\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addStudent(students);
+                break;
+            case 2:
+                displayStudents(students);
+                break;
+            case 3:
+                searchStudent(students);
+                break;
+            case 4:
+                cout << "Exiting program...\n";
+                break;
+            default:
+                cout << "Invalid choice. Try again.\n";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
+
+// Function to add student
+void addStudent(vector<Student>& students) {
+    Student s;
+    cout << "Enter Student ID: ";
+    cin >> s.id;
+    cin.ignore();
+
+    cout << "Enter Student Name: ";
+    getline(cin, s.name);
+
+    cout << "Enter Marks: ";
+    cin >> s.marks;
+
+    students.push_back(s);
+    cout << "Student added successfully!\n";
+}
+
+// Function to display all students
+void displayStudents(const vector<Student>& students) {
+    if (students.empty()) {
+        cout << "No student records found.\n";
+        return;
+    }
+
+    cout << "\n--- Student Records ---\n";
+    for (const auto& s : students) {
+        cout << "ID: " << s.id
+             << ", Name: " << s.name
+             << ", Marks: " << s.marks << endl;
+    }
+}
+
+// Function to search student by ID
+void searchStudent(const vector<Student>& students) {
+    int searchId;
+    cout << "Enter Student ID to search: ";
+    cin >> searchId;
+
+    for (const auto& s : students) {
+        if (s.id == searchId) {
+            cout << "Student Found!\n";
+            cout << "ID: " << s.id
+                 << ", Name: " << s.name
+                 << ", Marks: " << s.marks << endl;
+            return;
+        }
+    }
+
+    cout << "Student not found.\n";
+}
